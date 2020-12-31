@@ -2,7 +2,9 @@ const INITIAL_STATE = {
     editMode: false,
     title: null,
     body: null,
-    category: ''
+    category: '',
+    isPinned: false,
+    image: null
 }
 
 function reducer(state = INITIAL_STATE, action) {
@@ -14,7 +16,9 @@ function reducer(state = INITIAL_STATE, action) {
                 editMode: true,
                 title: action.payload.note.title,
                 body: action.payload.note.body,
-                category: action.payload.note.category
+                isPinned: action.payload.note['_raw'].is_pinned,
+                category: action.payload.note.category,
+                image: action.payload.note.image
             }
         case "CHANGE_TITLE":
             return {
@@ -30,6 +34,17 @@ function reducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 category: action.payload.category
+            }
+        case "CHANGE_IMAGE":
+            return {
+                ...state,
+                image: action.payload.image
+            }
+
+        case "CHANGE_IS_PINNED":
+            return {
+                ...state,
+                isPinned: action.payload.isPinned
             }
         case "RESET":
             return INITIAL_STATE

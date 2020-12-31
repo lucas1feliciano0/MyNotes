@@ -47,11 +47,26 @@ export default StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         marginBottom: height * 0.01
     },
+    sectionTitleSecundary: {
+        color: colorScheme.font.secundary,
+        fontSize: height * 0.015,
+        fontFamily: 'Poppins-Regular',
+        marginBottom: height * 0.01,
+        opacity: .5
+    },
     carousel: {
         marginVertical: height * 0.02
     },
     notesContainer: {
         flex: 1
+    },
+    categoriesContainerHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    categoriesContainerIcon: {
+        color: colorScheme.font.secundary,
     },
     carouselNotes: {
         flexGrow: 1,
@@ -64,7 +79,7 @@ export default StyleSheet.create({
             width: width * 0.35,
             backgroundColor: active ? colorScheme.font.primary : colorScheme.secundary,
             paddingHorizontal: width * 0.05,
-            paddingVertical: height * 0.005,
+            paddingVertical: height * 0.015,
             borderRadius: 50,
             marginHorizontal: width * 0.02
         }
@@ -73,7 +88,7 @@ export default StyleSheet.create({
     categoryBtnText: active => {
         return {
             textAlign: 'center',
-            fontFamily: 'NotoSansJP-Medium',
+            fontFamily: 'Quicksand-Medium',
             color: active ? colorScheme.background : colorScheme.font.secundary
         }
     }

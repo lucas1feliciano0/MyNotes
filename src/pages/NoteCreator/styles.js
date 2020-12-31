@@ -52,5 +52,33 @@ export default StyleSheet.create({
     },
     bodyInput: {
         color: colorScheme.font.primary
+    },
+    image: {
+        width: '50%',
+        height: undefined,
+        aspectRatio: 1,
+        resizeMode: 'contain'
+    },
+    textInputScroll: {
+        height: height * 0.5,
+    },
+    footer: {
+        position: 'absolute',
+        flexDirection: 'column',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        
+    },
+    footerHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: height * 0.025,
+        paddingHorizontal: width * 0.03
+    },
+    footerIcon: active => {
+        return {
+            color: active ? colorScheme.highlight : colorScheme.font.primary
+        }
     }
 })

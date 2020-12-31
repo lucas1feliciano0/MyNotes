@@ -5,7 +5,7 @@ import * as Animatable from 'react-native-animatable'
 
 
 
-const Button = ({ children, onPress, style, color }) => {
+const Button = ({ children, onPress, onLongPress, style, color }) => {
     const [pressed, setPressed] = useState(false)
 
     function onOverlayShow() {
@@ -16,10 +16,17 @@ const Button = ({ children, onPress, style, color }) => {
         setPressed(false)
     }
 
+    function onLongClick() {
+        console.log('segurando')
+
+        if (onLongPress) onLongPress()
+    }
+
     return (
 
         <TouchableHighlight
             onPress={onPress}
+            onLongPress={onLongClick}
             onHideUnderlay={onOverlayHide}
             onShowUnderlay={onOverlayShow}
             underlayColor={'none'}
@@ -37,7 +44,7 @@ const Button = ({ children, onPress, style, color }) => {
                     ]
                 }]}
         >
-            <Animatable.View animation="fadeInUp" useNativeDriver>
+            <Animatable.View animation="bounce" useNativeDriver>
                 {children}
             </Animatable.View>
         </TouchableHighlight>

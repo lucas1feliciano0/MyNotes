@@ -21,7 +21,7 @@ export default StyleSheet.create({
     title: active => {
         return {
             textAlign: 'center',
-            fontFamily: 'NotoSansJP-Medium',
+            fontFamily: 'Quicksand-Medium',
             color: active ? colorScheme.background : colorScheme.font.secundary
         }
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import withObservables from "@nozbe/with-observables";
 
@@ -8,8 +8,10 @@ import NoteButton from '../NoteButton'
 
 import styles from './styles';
 
-const NotesList = ({ notes, filter, navigation }) => {
 
+
+const NotesList = ({ notes, filter, navigation }) => {
+    
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -19,14 +21,13 @@ const NotesList = ({ notes, filter, navigation }) => {
 
             {
                 notes
-                    .reverse()
+                    .sort(function (a, b) { return b['_raw'].created_at - a['_raw'].created_at })
+                    .sort(function (a, b) { return b['_raw'].is_pinned - a['_raw'].is_pinned })
                     .map((note, index) => {
-                        if(filter === '') {
+                        if (filter === '') {
                             return (
                                 <NoteButton
-                                    title={note.title}
-                                    body={note.body}
-                                    date={note}
+                                    note={note}
                                     id={note.id}
                                     key={index}
                                     navigation={navigation}
@@ -37,9 +38,7 @@ const NotesList = ({ notes, filter, navigation }) => {
                             if (note.category === filter) {
                                 return (
                                     <NoteButton
-                                        title={note.title}
-                                        body={note.body}
-                                        date={note}
+                                        note={note}
                                         id={note.id}
                                         key={index}
                                         navigation={navigation}

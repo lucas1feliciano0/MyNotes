@@ -12,11 +12,12 @@ export default StyleSheet.create({
         paddingVertical: height * 0.035,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        left: 0,
 
+    },
+    body: {
+        paddingVertical: height * 0.01,
+        flex: 1,
+        width: '95%'
     },
     btn: {
         justifyContent: 'center',
@@ -48,7 +49,7 @@ export default StyleSheet.create({
             backgroundColor: active ? colorScheme.background : colorScheme.font.terciary,
             justifyContent: 'center',
             alignItems: 'center',
-            paddingVertical: height * 0.005,
+            paddingVertical: height * 0.015,
             paddingHorizontal: width * 0.05,
             borderRadius: 1000,
             marginHorizontal: width * .02
@@ -59,5 +60,15 @@ export default StyleSheet.create({
             color: active ? colorScheme.font.primary : colorScheme.terciary,
             fontFamily: 'Quicksand-Medium'
         }
-    }
+    },
+    section: {
+        flexDirection: 'column'
+    },
+    sectionTitle: {
+        color: colorScheme.terciary,
+        fontSize: height * 0.02,
+        fontFamily: 'Poppins-Regular',
+        marginVertical: height * 0.01,
+        paddingLeft: width * 0.05
+    },
 })

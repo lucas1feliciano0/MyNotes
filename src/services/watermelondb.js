@@ -16,7 +16,7 @@ export default database = new Database({
     actionsEnabled: true
 });
 
-export function saveNote(note) {
+export function saveNote(note, cb) {
     const noteCollection = database.collections.get('Notes')
 
     database.action(async () => {
@@ -25,13 +25,16 @@ export function saveNote(note) {
                 createdNote.title = note.title
                 createdNote.body = note.body
                 createdNote.category = note.category
-                createdNote.created_at = note.date
+                createdNote.createdAt = note.date
+                createdNote.isPinned = note.isPinned
             })
 
         } catch (error) {
             console.log('Deu erro: ' + error)
         }
     })
+
+    if(cb) cb()
 
 }
 
@@ -62,7 +65,8 @@ export async function updateNote(noteId, note) {
                 updatedNote.title = note.title
                 updatedNote.body = note.body
                 updatedNote.category = note.category
-                updatedNote.created_at = note.date
+                updatedNote.createdAt = note.date
+                updatedNote.isPinned = note.isPinned
             })
         } catch (error) {
             console.log('deu erro: ' + error)
@@ -70,7 +74,7 @@ export async function updateNote(noteId, note) {
     })
 }
 
-export async function deleteOneNote(noteId) {
+export async function deleteOneNote(noteId, cb) {
     const noteCollection = database.collections.get('Notes')
 
     const note = await noteCollection.find(noteId)
@@ -82,6 +86,8 @@ export async function deleteOneNote(noteId) {
             console.log('deu erro: ' + error)
         }
     })
+
+    if(cb) cb()
 }
 
 export function saveCategory(category) {
@@ -98,4 +104,20 @@ export function saveCategory(category) {
         }
     })
 
+}
+
+export async function deleteOneCategory(categoryId, cb) {
+    const categoryCollection = database.collections.get('Categories')
+
+    const category = await categoryCollection.find(categoryId)
+
+    await database.action(async () => {
+        try {
+            await category.destroyPermanently() 
+        } catch (error) {
+            console.log('deu erro: ' + error)
+        }
+    })
+
+    if(cb) cb()
 }

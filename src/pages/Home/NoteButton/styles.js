@@ -4,7 +4,7 @@ const [width, height] = [Dimensions.get('window').width, Dimensions.get('window'
 
 import colors from '../../../theme/colors'
 
-const colorScheme = colors[Appearance.getColorScheme()]
+export const colorScheme = colors[Appearance.getColorScheme()]
 
 export default StyleSheet.create({
     container: {
@@ -32,5 +32,10 @@ export default StyleSheet.create({
     date: {
         color: colorScheme.font.terciary,
         fontFamily: 'Montserrat-Thin',
+        marginLeft: width * 0.01
+    },
+    footer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })

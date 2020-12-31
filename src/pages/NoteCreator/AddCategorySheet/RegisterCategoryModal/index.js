@@ -59,7 +59,7 @@ const RegisterCategoryModal = ({ visible, cbClose }) => {
                             placeholder="Digite o nome da categoria"
                         />
 
-                        <TouchableOpacity onPress={save} style={styles.btn}>
+                        <TouchableOpacity disabled={!title} onPress={save} style={styles.btn}>
                             <Icon style={styles.btnIcon} name="check" size={24} />
                             <Text style={styles.btnText}>Salvar</Text>
                         </TouchableOpacity>

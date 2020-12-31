@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Text, View, ScrollView } from 'react-native';
+import { TouchableOpacity, Text, View, LayoutAnimation } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import Icon from 'react-native-vector-icons/AntDesign'
 
@@ -7,7 +7,7 @@ import RegisterCategoryModal from './RegisterCategoryModal'
 
 import * as Animatable from 'react-native-animatable'
 
-import CategoryList from './CategoryList'
+import CategoryList from '../../../components/CategoryList'
 
 import styles, { height } from './styles';
 
@@ -21,6 +21,7 @@ const AddCategorySheet = () => {
     var category = useSelector(state => state.createNote.category)
 
     function move() {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
         setOpen(!isOpen)
     }
 
@@ -38,7 +39,7 @@ const AddCategorySheet = () => {
                     editMode ?
                         <Text style={styles.title}>Alterar categoria</Text>
                         :
-                        <Text style={styles.title}>Cadastrar categoria</Text>
+                        <Text style={styles.title}>Adicionar categoria</Text>
                 }
             </TouchableOpacity>
 

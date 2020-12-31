@@ -1,10 +1,17 @@
 import React from 'react';
-import { StatusBar, Appearance } from 'react-native';
+import { StatusBar, Appearance, UIManager, Platform, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
 import HomeRoutes from './routes/main.routes'
 
 import colors from './theme/colors'
+
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 const App = () => {
   let isLightScheme = Appearance.getColorScheme() === 'light'
