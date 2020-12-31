@@ -1,53 +1,47 @@
-import React, { useState } from 'react';
-import { View, TouchableHighlight, StyleSheet } from 'react-native';
+import React from 'react';
+import { TouchableHighlight, StyleSheet, Animated } from 'react-native';
 
 import * as Animatable from 'react-native-animatable'
 
-
+const TouchableAnimated = Animated.createAnimatedComponent(TouchableHighlight)
 
 const Button = ({ children, onPress, onLongPress, style, color }) => {
-    const [pressed, setPressed] = useState(false)
+    var scaleValue = new Animated.Value(1)
 
     function onOverlayShow() {
-        setPressed(true)
+        Animated.spring(scaleValue, {
+            toValue: .9,
+            speed: 500,
+            useNativeDriver: true
+        }).start()
     }
 
     function onOverlayHide() {
-        setPressed(false)
+        Animated.spring(scaleValue, {
+            toValue: 1,
+            speed: 500,
+            useNativeDriver: true
+        }).start()
     }
 
     function onLongClick() {
-        console.log('segurando')
-
         if (onLongPress) onLongPress()
     }
 
     return (
 
-        <TouchableHighlight
+        <TouchableAnimated
             onPress={onPress}
             onLongPress={onLongClick}
             onHideUnderlay={onOverlayHide}
             onShowUnderlay={onOverlayShow}
             underlayColor={'none'}
-            style={[style, { overflow: 'hidden' }, pressed ? {
-                transform: [
-                    {
-                        scale: .9
-                    }
-                ]
-            } : {
-                    transform: [
-                        {
-                            scale: 1
-                        }
-                    ]
-                }]}
+            style={[style, { overflow: 'hidden' }, { transform: [ { scale: scaleValue } ] }]}
         >
             <Animatable.View animation="bounce" useNativeDriver>
                 {children}
             </Animatable.View>
-        </TouchableHighlight>
+        </TouchableAnimated>
     );
 }
 

@@ -225,7 +225,6 @@ const NoteCreator = ({ navigation }) => {
                     />
                     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.textInputScroll}>
 
-
                         <TextInput
                             placeholder="Corpo da nota"
                             placeholderTextColor={colorScheme.font.secundary}

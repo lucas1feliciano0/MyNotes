@@ -60,7 +60,7 @@ export default StyleSheet.create({
         resizeMode: 'contain'
     },
     textInputScroll: {
-        height: height * 0.5,
+        height: height * 0.7,
     },
     footer: {
         position: 'absolute',
