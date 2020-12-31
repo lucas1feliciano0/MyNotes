@@ -8,6 +8,7 @@ import * as Animatable from 'react-native-animatable'
 import { deleteOneCategory } from '../../../services/watermelondb'
 
 import CategoryList from '../../../components/CategoryList'
+import AnimationView from '../../../components/AnimationView'
 
 import styles, { colorScheme } from './styles';
 
@@ -15,7 +16,7 @@ const CategoriesModal = ({ visible, cbClose, categories }) => {
 
     function onPress(id) {
         Vibration.vibrate()
-        
+
         Alert.alert(
             "Deseja apagar a categoria?",
             "Ao clicar em confirmar, a categoria será excluída definitivamente.",
@@ -25,9 +26,11 @@ const CategoriesModal = ({ visible, cbClose, categories }) => {
                     onPress: () => { },
                     style: "cancel"
                 },
-                { text: "Confirmar", onPress: () => deleteOneCategory(id, () => {
-                    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring); 
-                }) }
+                {
+                    text: "Confirmar", onPress: () => deleteOneCategory(id, () => {
+                        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+                    })
+                }
             ],
             { cancelable: true }
         );
@@ -47,14 +50,21 @@ const CategoriesModal = ({ visible, cbClose, categories }) => {
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Categorias</Text>
 
-                    <CategoryList
-                        style={styles.categoryItem}
-                        textStyle={styles.categoryTitle}
-                        horizontal={false}
-                        onPress={onPress}
-                    >
-                        <Icon style={styles.headerIcon} size={24} name="close" />
-                    </CategoryList>
+                    {
+                        categories.length > 0 ?
+                            <CategoryList
+                                style={styles.categoryItem}
+                                textStyle={styles.categoryTitle}
+                                horizontal={false}
+                                onPress={onPress}
+                            >
+                                <Icon style={styles.headerIcon} size={24} name="close" />
+                            </CategoryList>
+                            :
+                            <AnimationView 
+                                title="Você não possui categorias"
+                            />
+                    }
                 </View>
             </View>
 
